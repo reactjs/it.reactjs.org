@@ -6,19 +6,19 @@ layout: docs
 category: FAQ
 ---
 
-### How can I make an AJAX call? {#how-can-i-make-an-ajax-call}
+### Come posso fare una chiamata AJAX ? {#how-can-i-make-an-ajax-call}
 
-You can use any AJAX library you like with React. Some popular ones are [Axios](https://github.com/axios/axios), [jQuery AJAX](https://api.jquery.com/jQuery.ajax/), and the browser built-in [window.fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
+Puoi usare qualsiasi libreria AJAX con React. Le piu popolari sono [Axios](https://github.com/axios/axios), [jQuery AJAX](https://api.jquery.com/jQuery.ajax/), e il e il browser integrato [window.fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API).
 
-### Where in the component lifecycle should I make an AJAX call? {#where-in-the-component-lifecycle-should-i-make-an-ajax-call}
+### In quale punto del ciclo di vita del componente devo effettuare una chiamata AJAX? {#where-in-the-component-lifecycle-should-i-make-an-ajax-call}
 
-You should populate data with AJAX calls in the [`componentDidMount`](/docs/react-component.html#mounting) lifecycle method. This is so you can use `setState` to update your component when the data is retrieved.
+Dovresti popolare i dati con chiamate AJAX nel metodo [`componentDidMount`](/docs/react-component.html#mounting). In questo modo puoi usare `setState` per aggiornare il tuo componente quando i dati vengono recuperati.
 
-### Example: Using AJAX results to set local state {#example-using-ajax-results-to-set-local-state}
+### Esempio: utilizzo dei risultati AJAX per impostare lo stato locale {#example-using-ajax-results-to-set-local-state}
 
-The component below demonstrates how to make an AJAX call in `componentDidMount` to populate local component state. 
+Il componente seguente mostra come effettuare una chiamata AJAX in `componentDidMount` per popolare lo stato del componente locale.
 
-The example API returns a JSON object like this:
+L'API in questione restituisce un oggetto JSON di questo formato:
 
 ```
 {
@@ -50,9 +50,9 @@ class MyComponent extends React.Component {
             items: result.items
           });
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
+        // Nota: è importante gestire gli errori qui
+        // invece di un blocco catch() in modo da non fare passare
+        // eccezioni da bug reali nei componenti.
         (error) => {
           this.setState({
             isLoaded: true,
@@ -83,7 +83,7 @@ class MyComponent extends React.Component {
 }
 ```
 
-Here is the equivalent with [Hooks](https://reactjs.org/docs/hooks-intro.html): 
+Ecco l'equivalente con [Hooks](https://reactjs.org/docs/hooks-intro.html):
 
 ```js
 function MyComponent() {
@@ -91,9 +91,10 @@ function MyComponent() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
 
-  // Note: the empty deps array [] means
-  // this useEffect will run once
-  // similar to componentDidMount()
+
+  // Nota: l'array deps vuoto [] significa
+  // questo useEffect verrà eseguito una volta
+  // simile a componentDidMount()
   useEffect(() => {
     fetch("https://api.example.com/items")
       .then(res => res.json())
@@ -102,9 +103,9 @@ function MyComponent() {
           setIsLoaded(true);
           setItems(result);
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
+        // Nota: è importante gestire gli errori qui
+        // invece di un blocco catch() in modo da non fare passare
+        // eccezioni da bug reali nei componenti.
         (error) => {
           setIsLoaded(true);
           setError(error);
